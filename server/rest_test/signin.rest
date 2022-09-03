@@ -1,0 +1,12 @@
+@host = 127.0.0.1:8080
+
+POST http://{{host}}/users/register
+Content-Type: application/json
+
+{
+  "username": "Kobo Kobo",
+  "Firstname": "Kobo",
+  "Lastname": "Kanaeru",
+  "email": "kobo@gmail.com",
+  "password": "rahasia"
+}

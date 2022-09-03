@@ -1,0 +1,9 @@
+@host = 127.0.0.1:8080
+
+PUT http://{{host}}/users/detail/  HTTP/1.1
+Content-Type: application/json 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6ImEzYzYxMzQyLTdjOWQtNDY1YS05N2M4LTNiNzZiMDgwN2RhOCIsIkVtYWlsIjoia29ib0BnbWFpbC5jb20iLCJleHAiOjE2NjA4MzIyNjd9.M38sIFV2pKOOXMpyFonxsUE2YgKjiLHmAupizua1xT4
+
+{
+  "username": "Kobo Kobo Kobo"
+}

@@ -1,0 +1,9 @@
+@host = 127.0.0.1:8080
+
+PUT  http://{{host}}/post/871aec74-b011-4252-820a-d9bba1dae400 HTTP/1.1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6IjJkODcwZGE0LTQyYmUtNDdjYy04OGEwLWM2YmY1Njg0YTQzMiIsIkVtYWlsIjoibWFuYWJ1QGdtYWlsLmNvbSIsImV4cCI6MTY2MDc5NTY3OX0.l0vlVvCnTLT3Pi214XflBRqN82SDecMadXRrwMl4hUI
+
+{
+  "content": "Membuat pakariya seni budaya"
+}

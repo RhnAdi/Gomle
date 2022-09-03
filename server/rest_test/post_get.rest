@@ -1,0 +1,5 @@
+@host=127.0.0.1:8080
+
+GET http://{{host}}/post/871aec74-b011-4252-820a-d9bba1dae400 HTTP/1.1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6IjJkODcwZGE0LTQyYmUtNDdjYy04OGEwLWM2YmY1Njg0YTQzMiIsIkVtYWlsIjoibWFuYWJ1QGdtYWlsLmNvbSIsImV4cCI6MTY2MDc5NzM0Nn0.gtjEuc5fw2Lq7AS5skZjkwvmsp-VX8mk-UvgG6VH7HE

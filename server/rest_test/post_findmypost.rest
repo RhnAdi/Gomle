@@ -1,0 +1,5 @@
+@host = 127.0.0.1:8080
+
+GET http://{{host}}/post/mypost HTTP/1.1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6ImVlODQzODNiLWQ3YTktNDkwYS05YWZmLTMzM2NmY2RlMjEyZCIsIkVtYWlsIjoic2hpbm9idUBnbWFpbC5jb20iLCJleHAiOjE2NjA3OTc2Mzh9.HwIiigM0J76DFQIpKzEJhSxW7K2Zc6T_3OEEv0iard8
