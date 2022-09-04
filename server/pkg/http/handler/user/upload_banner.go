@@ -37,7 +37,7 @@ func (h *UserHandler) UploadBanner(c *gin.Context) {
 			c.JSON(http.StatusNotFound, helper.ErrorResponse{
 				Status:  "failed",
 				Message: "can't upload image: 124",
-				Field:   "photo_profile",
+				Field:   "banner",
 				Error:   e.Error(),
 			})
 			return

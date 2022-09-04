@@ -83,6 +83,16 @@ func (s *postService) FollowingPosts(claim auth.JWTClaim) (posts []models.Post, 
 	return
 }
 
+func (s *postService) AddComment(claim auth.JWTClaim, postId string, commentReq dto.CommentRequest) (comment models.Comment, err error) {
+	comment, err = s.PostDB.AddComment(models.Comment{
+		PostId: postId,
+		UserId: claim.ID,
+		Text:   commentReq.Text,
+		File:   commentReq.File,
+	})
+	return
+}
+
 func NewPostService(postDB domain.PostDB) *postService {
 	return &postService{PostDB: postDB}
 }

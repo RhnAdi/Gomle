@@ -20,6 +20,7 @@ type PostService interface {
 	Update(claim auth.JWTClaim, post Post) (models.Post, error)
 	Delete(claim auth.JWTClaim, post Post) (models.Post, error)
 	FollowingPosts(claim auth.JWTClaim) ([]models.Post, error)
+	AddComment(claim auth.JWTClaim, post_id string, comment dto.CommentRequest) (models.Comment, error)
 }
 
 type PostDB interface {
@@ -30,4 +31,5 @@ type PostDB interface {
 	Update(models.Post) (models.Post, error)
 	Delete(models.Post) (models.Post, error)
 	FollowingPosts(userId string) ([]models.Post, error)
+	AddComment(comment models.Comment) (models.Comment, error)
 }

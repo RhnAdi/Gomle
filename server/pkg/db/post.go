@@ -16,7 +16,7 @@ func (r *postDB) FindAll() ([]models.Post, error) {
 }
 
 func (r *postDB) Find(post models.Post) (models.Post, error) {
-	err := r.db.Model(&models.Post{}).Preload("Files").First(&post).Error
+	err := r.db.Model(&models.Post{}).Preload("Files").Preload("Comments").First(&post).Error
 	return post, err
 }
 
@@ -63,6 +63,11 @@ func (r *postDB) FollowingPosts(userId string) ([]models.Post, error) {
 	).Where("user_relation.user_id = ?", userId).Find(&data).Error
 
 	return data, err
+}
+
+func (r *postDB) AddComment(comment models.Comment) (models.Comment, error) {
+	err := r.db.Model(&models.Post{ID: comment.PostId}).Association("Comments").Append(&comment)
+	return comment, err
 }
 
 func NewPostDB(db *gorm.DB) *postDB {

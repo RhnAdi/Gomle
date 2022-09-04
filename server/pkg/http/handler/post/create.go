@@ -2,6 +2,7 @@ package PostHandler
 
 import (
 	"net/http"
+	"os"
 	"path/filepath"
 
 	"github.com/RhnAdi/Gomle/internal/auth"
@@ -71,10 +72,24 @@ func (h *PostHandler) Create(c *gin.Context) {
 	})
 
 	if err != nil {
+		// Delete saving image
+		for _, image := range body.Files {
+			if e := os.Remove("../../public/images/" + image.Filename); e != nil {
+				c.JSON(http.StatusNotFound, helper.ErrorResponse{
+					Status:  "failed",
+					Message: "can't upload image: 124",
+					Field:   "photo_profile",
+					Error:   e.Error(),
+				})
+				c.Abort()
+			}
+		}
+
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "failed",
 			"error":   err.Error(),
 		})
+		return
 	}
 	c.JSON(http.StatusCreated, gin.H{
 		"message": "success",

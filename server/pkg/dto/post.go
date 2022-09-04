@@ -1,6 +1,7 @@
 package dto
 
 import (
+	"mime/multipart"
 	"time"
 
 	"github.com/RhnAdi/Gomle/pkg/models"
@@ -20,10 +21,21 @@ type MyPostResponse struct {
 }
 
 type PostResponse struct {
-	ID        string         `json:"id"`
-	UserID    string         `json:"user_id"`
-	Files     []models.Image `json:"files"`
-	Content   string         `json:"content"`
-	CreatedAt time.Time      `json:"created_at"`
-	UpdatedAt time.Time      `json:"updated_at"`
+	ID        string           `json:"id"`
+	UserID    string           `json:"user_id"`
+	Files     []models.Image   `json:"files"`
+	Content   string           `json:"content"`
+	Comments  []models.Comment `json:"comments"`
+	CreatedAt time.Time        `json:"created_at"`
+	UpdatedAt time.Time        `json:"updated_at"`
+}
+
+type CommentBody struct {
+	Text string                `json:"text"`
+	File *multipart.FileHeader `json:"file"`
+}
+
+type CommentRequest struct {
+	Text string `json:"text" binding:"required"`
+	File string `json:"file"`
 }

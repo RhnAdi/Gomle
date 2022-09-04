@@ -25,7 +25,7 @@ func Init() (*gorm.DB, error) {
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
-	db.AutoMigrate(&models.User{}, &models.UserDetail{}, &models.Post{}, &models.Image{})
+	db.AutoMigrate(&models.User{}, &models.UserDetail{}, &models.Post{}, &models.Image{}, &models.Comment{})
 
 	return db, err
 }

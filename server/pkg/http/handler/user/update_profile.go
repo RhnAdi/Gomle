@@ -2,6 +2,7 @@ package UserHandler
 
 import (
 	"net/http"
+	"os"
 	"path/filepath"
 
 	"github.com/RhnAdi/Gomle/internal/auth"
@@ -40,6 +41,7 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 		})
 		return
 	}
+
 	err = c.SaveUploadedFile(body.Banner, "../../public/images/"+newBannerFilename)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, helper.ErrorResponse{
@@ -58,7 +60,28 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 		PhotoProfile: newPhotoProfileFilename,
 		Banner:       newBannerFilename,
 	})
+
 	if err != nil {
+		if e := os.Remove("../../public/images/" + newPhotoProfileFilename); e != nil {
+			c.JSON(http.StatusNotFound, helper.ErrorResponse{
+				Status:  "failed",
+				Message: "can't upload image: 124",
+				Field:   "photo_profile",
+				Error:   e.Error(),
+			})
+			return
+		}
+
+		if e := os.Remove("../../public/images/" + newBannerFilename); e != nil {
+			c.JSON(http.StatusNotFound, helper.ErrorResponse{
+				Status:  "failed",
+				Message: "can't upload image: 124",
+				Field:   "banner",
+				Error:   e.Error(),
+			})
+			return
+		}
+
 		if err.Error() == gorm.ErrRecordNotFound.Error() {
 			c.JSON(http.StatusNotFound, helper.ErrorResponse{
 				Status:  "failed",
@@ -69,6 +92,7 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 		}
 		return
 	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"message": "update success",
 		"data": dto.UserDetailResponse{

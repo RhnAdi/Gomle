@@ -17,5 +17,6 @@ func Post(r *gin.Engine, h *PostHandler.PostHandler) {
 		router.DELETE("/:id", h.Delete)
 		router.GET("/mypost", h.FindMyPost)
 		router.GET("/dashboard", h.FollowingPosts)
+		router.POST("/comment/:id", h.AddComment)
 	}
 }

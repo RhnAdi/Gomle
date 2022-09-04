@@ -37,6 +37,7 @@ func (h *PostHandler) Find(c *gin.Context) {
 			UserID:    data.UserID,
 			Content:   data.Content,
 			Files:     data.Files,
+			Comments:  data.Comments,
 			CreatedAt: data.CreatedAt,
 			UpdatedAt: data.UpdatedAt,
 		},
