@@ -39,3 +39,12 @@ type CommentRequest struct {
 	Text string `json:"text" binding:"required"`
 	File string `json:"file"`
 }
+
+type FriendPostResponse struct {
+	ID        string    `json:"id"`
+	UserID    string    `json:"user_id"`
+	Content   string    `json:"content"`
+	Files     []string  `json:"files"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}

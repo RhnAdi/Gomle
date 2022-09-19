@@ -58,7 +58,7 @@ func (s *userService) Find(id string) (user models.User, err error) {
 }
 
 func (s *userService) FindProfile(id string) (data models.UserDetail, err error) {
-	data, err = s.UserDetailDB.Find(models.UserDetail{ID: id})
+	data, err = s.UserDetailDB.Find(models.UserDetail{UserID: id})
 	return
 }
 

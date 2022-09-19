@@ -1,8 +1,6 @@
 package db
 
 import (
-	"log"
-
 	"github.com/RhnAdi/Gomle/pkg/dto"
 	"github.com/RhnAdi/Gomle/pkg/models"
 	"gorm.io/gorm"
@@ -19,7 +17,6 @@ func (u *userDB) FindAll() (users []models.User, err error) {
 
 func (u *userDB) Find(user models.User) (models.User, error) {
 	err := u.db.Preload("UserDetail").First(&user).Error
-	log.Println(user)
 	return user, err
 }
 

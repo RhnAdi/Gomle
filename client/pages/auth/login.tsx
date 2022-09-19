@@ -27,7 +27,7 @@ const Login: NextPageWithLayout = () => {
           password: data.password,
         })
         .then((res) => {
-          const token = res.data.data.token;
+          const token = res.data.token;
           hasCookie("auth") && deleteCookie("auth");
           setCookie("auth", token);
           router.push("/");

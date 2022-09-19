@@ -26,7 +26,15 @@ func (h *PostHandler) Create(c *gin.Context) {
 	}
 
 	// Bind Form Data to body
-	body.Content = formdata.Value["content"][0]
+	if val, ok := formdata.Value["content"]; ok && val[0] != "" {
+		body.Content = val[0]
+	} else {
+		c.JSON(http.StatusBadRequest, helper.ErrorResponse{
+			Status:  "failed",
+			Message: "content not empty",
+			Field:   "content",
+		})
+	}
 
 	// Handle Multiple Upload
 	for _, file := range formdata.File["files"] {

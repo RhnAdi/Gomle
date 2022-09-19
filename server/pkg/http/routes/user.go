@@ -13,6 +13,8 @@ func User(r *gin.Engine, h *UserHandler.UserHandler) {
 		router.POST("/register", h.Register)
 		router.POST("/login", h.Login)
 
+		router.GET("/:id/detail", h.FindProfile)
+
 		// User Account
 		account := router.Group("/account")
 		account.Use(middleware.Auth())
@@ -21,7 +23,6 @@ func User(r *gin.Engine, h *UserHandler.UserHandler) {
 		// User Detail ( Profile )
 		detail := router.Group("/detail")
 		detail.Use(middleware.Auth())
-		detail.GET("/", h.FindProfile)
 		detail.PUT("/", h.UpdateProfile)
 
 		// User Following

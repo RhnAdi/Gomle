@@ -1,7 +1,7 @@
 package app
 
 import (
-	"time"
+	"os"
 
 	"github.com/RhnAdi/Gomle/internal/auth"
 	"github.com/RhnAdi/Gomle/pkg/domain"
@@ -49,20 +49,31 @@ func (s *postService) Create(claim auth.JWTClaim, postReq domain.Post) (post mod
 }
 
 func (s *postService) Update(claim auth.JWTClaim, postReq domain.Post) (post models.Post, err error) {
-	post, err = s.PostDB.Find(models.Post{ID: postReq.ID})
+	data, err := s.PostDB.Find(models.Post{ID: postReq.ID})
 	if err != nil {
 		return
 	}
-	if claim.ID != post.UserID {
+
+	if claim.ID != data.UserID {
 		return models.Post{}, helper.ErrYouAreNotOwner
 	}
-	post, err = s.PostDB.Update(models.Post{
-		ID:        post.ID,
-		UserID:    post.UserID,
-		Content:   postReq.Content,
-		UpdatedAt: time.Now(),
-		CreatedAt: post.CreatedAt,
-	})
+
+	// Multiple Delete with checking File update
+	if len(data.Files) > 0 {
+		for _, file := range data.Files {
+			if _, e := os.Stat("../../public/images/" + file.Filename); e == nil {
+				if err = os.Remove("../../public/images/" + file.Filename); err != nil {
+					return post, err
+				}
+			}
+		}
+	}
+
+	data.Content = postReq.Content
+	data.Files = postReq.Files
+
+	post, err = s.PostDB.Update(data)
+
 	return
 }
 
@@ -75,6 +86,7 @@ func (s *postService) Delete(claim auth.JWTClaim, postReq domain.Post) (post mod
 		return models.Post{}, helper.ErrYouAreNotOwner
 	}
 	post, err = s.PostDB.Delete(post)
+
 	return
 }
 
@@ -85,8 +97,8 @@ func (s *postService) FollowingPosts(claim auth.JWTClaim) (posts []models.Post, 
 
 func (s *postService) AddComment(claim auth.JWTClaim, postId string, commentReq dto.CommentRequest) (comment models.Comment, err error) {
 	comment, err = s.PostDB.AddComment(models.Comment{
-		PostId: postId,
-		UserId: claim.ID,
+		PostID: postId,
+		UserID: claim.ID,
 		Text:   commentReq.Text,
 		File:   commentReq.File,
 	})

@@ -3,13 +3,12 @@ package UserHandler
 import (
 	"net/http"
 
-	"github.com/RhnAdi/Gomle/internal/auth"
 	"github.com/gin-gonic/gin"
 )
 
 func (h *UserHandler) FindProfile(c *gin.Context) {
-	claim := c.MustGet("claim").(auth.JWTClaim)
-	data, err := h.service.FindProfile(claim.ID)
+	id := c.Param("id")
+	data, err := h.service.FindProfile(id)
 	if err != nil {
 		c.JSON(http.StatusForbidden, gin.H{
 			"message": "failed",
