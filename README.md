@@ -43,7 +43,7 @@
 
 Coming Soon Feature :
 
-- Comment Post
+- Comment Post ( Process )
 - Like Post
 - Unfollow
 - Search
