@@ -1,0 +1,806 @@
+basePath: /api/v1
+definitions:
+  dto.Account:
+    properties:
+      data:
+        $ref: '#/definitions/dto.Profile'
+      status:
+        type: string
+    type: object
+  dto.AllMyPostResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/dto.MyPostResponse'
+        type: array
+      status:
+        type: string
+    type: object
+  dto.AllPostResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/models.Post'
+        type: array
+      status:
+        type: string
+    type: object
+  dto.AuthResponse:
+    properties:
+      status:
+        type: string
+      token:
+        type: string
+    type: object
+  dto.DeletePostResponse:
+    properties:
+      data:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.FollowData:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.FollowedResponse:
+    properties:
+      followed:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.Followers:
+    properties:
+      count:
+        type: integer
+      followers:
+        items:
+          $ref: '#/definitions/dto.FollowData'
+        type: array
+    type: object
+  dto.FollowersResponse:
+    properties:
+      data:
+        $ref: '#/definitions/dto.Followers'
+      status:
+        type: string
+    type: object
+  dto.Following:
+    properties:
+      count:
+        type: integer
+      followings:
+        items:
+          $ref: '#/definitions/dto.FollowData'
+        type: array
+    type: object
+  dto.FollowingsResponse:
+    properties:
+      data:
+        $ref: '#/definitions/dto.Following'
+      status:
+        type: string
+    type: object
+  dto.MyPostResponse:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      files:
+        items:
+          $ref: '#/definitions/models.Image'
+        type: array
+      id:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.Post:
+    properties:
+      comments:
+        items:
+          $ref: '#/definitions/models.Comment'
+        type: array
+      content:
+        type: string
+      created_at:
+        type: string
+      files:
+        items:
+          $ref: '#/definitions/models.Image'
+        type: array
+      id:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  dto.PostRequestBody:
+    properties:
+      content:
+        type: string
+      files:
+        items:
+          $ref: '#/definitions/models.Image'
+        type: array
+    type: object
+  dto.PostResponse:
+    properties:
+      data:
+        $ref: '#/definitions/dto.Post'
+      status:
+        type: string
+    type: object
+  dto.Profile:
+    properties:
+      banner:
+        type: string
+      created_at:
+        type: string
+      email:
+        type: string
+      firstname:
+        type: string
+      followers_count:
+        type: integer
+      following_count:
+        type: integer
+      id:
+        type: string
+      lastname:
+        type: string
+      photo_profile:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.UploadFileResponse:
+    properties:
+      field:
+        type: string
+      filename:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.UserDetailBody:
+    properties:
+      banner:
+        $ref: '#/definitions/multipart.FileHeader'
+      firstname:
+        type: string
+      lastname:
+        type: string
+      photo_profile:
+        $ref: '#/definitions/multipart.FileHeader'
+      username:
+        type: string
+    type: object
+  dto.UserDetailInfo:
+    properties:
+      banner:
+        type: string
+      created_at:
+        type: string
+      firstname:
+        type: string
+      id:
+        type: string
+      lastname:
+        type: string
+      photo_profile:
+        type: string
+      updatedAt:
+        type: string
+      user_id:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.UserDetailResponse:
+    properties:
+      data:
+        $ref: '#/definitions/dto.UserDetailInfo'
+      status:
+        type: string
+    type: object
+  dto.UserLoginBody:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  dto.UserProfile:
+    properties:
+      data:
+        $ref: '#/definitions/models.Profile'
+      status:
+        type: string
+    type: object
+  dto.UserRegisterBody:
+    properties:
+      email:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - firstname
+    - lastname
+    - password
+    - username
+    type: object
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  helper.ErrorResponse:
+    properties:
+      error:
+        type: string
+      field:
+        type: string
+      message:
+        type: string
+      status:
+        type: string
+    type: object
+  models.Comment:
+    properties:
+      file:
+        type: string
+      id:
+        type: string
+      post_id:
+        type: string
+      text:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.Image:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      filename:
+        type: string
+      id:
+        type: string
+      post_id:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Post:
+    properties:
+      comments:
+        items:
+          $ref: '#/definitions/models.Comment'
+        type: array
+      content:
+        type: string
+      created_at:
+        type: string
+      files:
+        items:
+          $ref: '#/definitions/models.Image'
+        type: array
+      id:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.Profile:
+    properties:
+      banner:
+        type: string
+      created_at:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      firstname:
+        type: string
+      id:
+        type: string
+      lastname:
+        type: string
+      photo_profile:
+        type: string
+      updated_at:
+        type: string
+      userID:
+        type: string
+      username:
+        type: string
+    type: object
+  multipart.FileHeader:
+    properties:
+      filename:
+        type: string
+      header:
+        $ref: '#/definitions/textproto.MIMEHeader'
+      size:
+        type: integer
+    type: object
+  textproto.MIMEHeader:
+    additionalProperties:
+      items:
+        type: string
+      type: array
+    type: object
+info:
+  contact:
+    email: raihanadinugroho9g26@gmail.com
+  description: Rest API Social Media App using Go Language.
+  title: Gomle - Social Media App API
+  version: "1.0"
+paths:
+  /post/:
+    get:
+      description: list all post
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.AllPostResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: list post
+      tags:
+      - post
+    post:
+      consumes:
+      - application/json
+      description: create post need auth token in authorization
+      parameters:
+      - description: create post
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PostRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.PostResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: create post
+      tags:
+      - post
+  /post/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete post need auth token in authorization
+      parameters:
+      - description: id post
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.DeletePostResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: delete post
+      tags:
+      - post
+    get:
+      description: get post by id
+      parameters:
+      - description: id post
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.PostResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: get post
+      tags:
+      - post
+    put:
+      consumes:
+      - application/json
+      description: update post need auth token in authorization
+      parameters:
+      - description: id post
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: update post
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PostRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.PostResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: update post
+      tags:
+      - post
+  /post/dashboard:
+    get:
+      consumes:
+      - application/json
+      description: get all followings post need auth token in authorization
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.AllMyPostResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: get all followings post in dashboard
+      tags:
+      - post
+  /post/mypost:
+    get:
+      consumes:
+      - application/json
+      description: get all my post need auth token in authorization
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.AllMyPostResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: get all my post
+      tags:
+      - post
+  /users/{id}/profile:
+    get:
+      consumes:
+      - application/json
+      description: get account profile
+      parameters:
+      - description: id account
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserProfile'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: account profile
+      tags:
+      - accounts
+  /users/account/:
+    get:
+      consumes:
+      - application/json
+      description: Need auth token in header to call this endpoint
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Account'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Get user account information
+      tags:
+      - accounts
+  /users/follow/{id}:
+    get:
+      consumes:
+      - application/json
+      description: follow people for get update their post and save them in your contact.
+        need auth token in header to call this endpoint
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.FollowedResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: follow user to get her post
+      tags:
+      - accounts
+  /users/followers:
+    get:
+      consumes:
+      - application/json
+      description: your list followers user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.FollowersResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: get list your followers user
+      tags:
+      - accounts
+  /users/followings/:
+    get:
+      consumes:
+      - application/json
+      description: your list followings user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.FollowingsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: get list your followings user
+      tags:
+      - accounts
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: login to account
+      parameters:
+      - description: login user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserLoginBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.AuthResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: account login
+      tags:
+      - authentication
+  /users/profile/:
+    put:
+      consumes:
+      - application/json
+      description: need auth token in header for update account profile
+      parameters:
+      - description: update profile
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserDetailBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserDetailResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: update account profile
+      tags:
+      - accounts
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: create a new account
+      parameters:
+      - description: create user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserRegisterBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.AuthResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: account register
+      tags:
+      - authentication
+  /users/upload/banner:
+    put:
+      consumes:
+      - multipart/form-data
+      description: need auth token in header for update banner
+      parameters:
+      - description: upload banner
+        in: formData
+        name: banner
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UploadFileResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: upload banner
+      tags:
+      - accounts
+  /users/upload/photo_profile:
+    put:
+      consumes:
+      - multipart/form-data
+      description: need auth token in header for update upload photo profile
+      parameters:
+      - description: upload photo profile
+        in: formData
+        name: photo_profile
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UploadFileResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: upload photo profile
+      tags:
+      - accounts
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

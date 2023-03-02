@@ -17,7 +17,7 @@ type JWTClaim struct {
 }
 
 func GenerateJWT(id string, email string) (string, error) {
-	err := godotenv.Load("../../.env")
+	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatalf("error: can't read env file, errorMessage: %F", err)
 	}
@@ -36,7 +36,7 @@ func GenerateJWT(id string, email string) (string, error) {
 }
 
 func ValidateToken(tokenString string) (JWTClaim, error) {
-	err := godotenv.Load("../../.env")
+	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatalf("error: can't read env file, errorMessage: %F", err)
 	}

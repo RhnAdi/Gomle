@@ -22,12 +22,18 @@ export default function PasswordInput(props: PasswordInputProps) {
         placeholder={props.name}
         className={`${
           props.py ? "py-" + props.py.toString() : "py-3"
-        } bg-gray-100 text-gray-800 dark:bg-gray-600 w-full px-6 block rounded-xl outline-none focus:ring-2 focus:ring-sky-500 dark:text-white focus:bg-gray-50 dark:focus:bg-gray-600`}
+        } bg-slate-100 text-slate-800 dark:bg-slate-700/50 w-full px-6 block rounded-xl outline-none focus:ring-2 focus:ring-sky-500 dark:text-white focus:bg-slate-50 dark:focus:bg-slate-600`}
         type={show ? "string" : "password"}
         {...props.config}
         {...props}
       />
-      <div className="text-gray-400 absolute right-6">{show ? <EyeOffIcon onClick={handleShow} /> : <EyeIcon onClick={handleShow} />}</div>
+      <div className="text-slate-400 absolute right-6">
+        {show ? (
+          <EyeOffIcon onClick={handleShow} />
+        ) : (
+          <EyeIcon onClick={handleShow} />
+        )}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_PORT=${DB_PORT}
+    volumes:
+      - ./database/postgres/docker-entrypoint-initdb:/docker-entrypoint-initdb.d/
+    expose:
+      - 5433
+    ports:
+      - "5433:5433"
+    networks:
+      - gomle-networks
+  server:
+    build: ./server
+    ports:
+      - 8080:8080
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_NAME=${DB_NAME}
+      - DB_HOST=database
+      - DB_PORT=${DB_PORT}
+      - JWT_KEY=${JWT_KEY}
+    depends_on:
+      - database
+    networks:
+      - gomle-networks
+  web:
+    build: ./client
+    ports:
+      - 3000:3000
+networks:
+  gomle-networks:
+    driver: bridge

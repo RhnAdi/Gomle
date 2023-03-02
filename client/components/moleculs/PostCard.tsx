@@ -9,7 +9,7 @@ import TimeAgo from "timeago-react";
 import Gallery from "./Gallery";
 
 type UserCardProps = {
-  user_id: string;
+  user_id?: string;
   date: string;
   post: string;
   images?: string[];
@@ -38,10 +38,10 @@ export default function PostCard(props: UserCardProps) {
   useEffect(() => {
     async function fetch() {
       try {
-        const res = await axios.get(`http://127.0.0.1:8080/users/${props.user_id}/detail`);
+        const res = await axios.get(
+          `http://127.0.0.1:8080/api/v1/users/${props.user_id}/profile`
+        );
         const data = res.data.data;
-        console.log(res);
-        console.log(data);
         setUserDetail(data);
       } catch {
         setError(true);
@@ -54,40 +54,42 @@ export default function PostCard(props: UserCardProps) {
     return <p>Error</p>;
   }
   return (
-    <div className="card bg-gray-50 dark:bg-gray-700 rounded-2xl overflow-hidden h-min w-full my-3 shadow p-1">
-      <div className="user_info px-4 my-2 flex justify-between items-center gap-x-4">
-        <div className="bg-gray-100 rounded-full p-2 text-sky-500 w-min border border-sky-500">
+    <div className="card bg-slate-50 dark:bg-slate-800 rounded-2xl overflow-hidden h-min w-full my-3 shadow p-1">
+      <div className="user_info px-4 my-2 mt-4 flex justify-between items-center gap-x-4">
+        <div className="bg-slate-100 rounded-full p-2 text-sky-500 w-min border border-sky-500">
           <UserIcon />
         </div>
         <div className="flex-grow">
-          <p className="text-gray-700 dark:text-white text-md font-semibold">{userDetail.username}</p>
-          <p className="text-gray-500 dark:text-gray-300 text-sm font-medium">
+          <p className="text-slate-700 dark:text-white text-md font-semibold">
+            {userDetail.username}
+          </p>
+          <p className="text-slate-500 dark:text-slate-300 text-sm font-medium">
             <TimeAgo datetime={props.date} locale="id_IDN" />
           </p>
         </div>
-        <div className="flex gap-x-1 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-full">
-          <div className="bg-gray-300 dark:bg-gray-400 rounded-full w-1.5 h-1.5"></div>
-          <div className="bg-gray-300 dark:bg-gray-400 rounded-full w-1.5 h-1.5"></div>
-          <div className="bg-gray-300 dark:bg-gray-400 rounded-full w-1.5 h-1.5"></div>
+        <div className="flex gap-x-1 cursor-pointer p-2 hover:bg-slate-100 dark:hover:bg-slate-600 rounded-full">
+          <div className="bg-slate-300 dark:bg-slate-400 rounded-full w-1.5 h-1.5"></div>
+          <div className="bg-slate-300 dark:bg-slate-400 rounded-full w-1.5 h-1.5"></div>
+          <div className="bg-slate-300 dark:bg-slate-400 rounded-full w-1.5 h-1.5"></div>
         </div>
       </div>
       {props.images && <Gallery files={props.images} />}
       <div className="flex gap-x-3 px-4 mt-4">
         <div className="flex gap-x-1">
           <HeartIcon className="text-pink-500" />
-          <p className="text-gray-400">24</p>
+          <p className="text-slate-400">24</p>
         </div>
         <div className="flex gap-x-1">
-          <ChatIcon className="text-gray-400" />
-          <p className="text-gray-400">12</p>
+          <ChatIcon className="text-slate-400" />
+          <p className="text-slate-400">12</p>
         </div>
       </div>
-      <div className="post px-4 mt-6 mb-4 text-gray-800 dark:text-gray-100 font-medium">
+      <div className="post px-4 mt-6 mb-4 text-slate-800 dark:text-slate-100 font-medium">
         <p>{props.post}</p>
       </div>
-      <div className="px-4 border-t py-3 border-gray-100 dark:border-gray-600">
+      <div className="px-4 border-t py-3 border-slate-100 dark:border-slate-600">
         <div className="flex gap-x-2 items-center">
-          <div className="bg-gray-200 rounded-full p-2 text-sky-500 w-min">
+          <div className="bg-slate-200 rounded-full p-2 text-sky-500 w-min">
             <UserIcon />
           </div>
           <Input placeholder="Comment" py={2} />

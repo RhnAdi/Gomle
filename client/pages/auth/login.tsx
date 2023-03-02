@@ -22,7 +22,7 @@ const Login: NextPageWithLayout = () => {
   const onSubmit = (data: any) => {
     return new Promise((resolve, reject) => {
       axios
-        .post("http://127.0.0.1:8080/users/login", {
+        .post("http://127.0.0.1:8080/api/v1/users/login", {
           email: data.email,
           password: data.password,
         })
@@ -35,13 +35,18 @@ const Login: NextPageWithLayout = () => {
         })
         .catch((err) => {
           setError("ErrorLogin", err.response.data.message);
-          reject(err);
+          reject(err.response.data.message);
         });
     });
   };
 
   return (
-    <div className={auth_style.wrapper + ` w-screen h-screen px-10 sm:px-16 md:px-20 lg:px-24 py-10`}>
+    <div
+      className={
+        auth_style.wrapper +
+        ` w-screen h-screen px-10 sm:px-16 md:px-20 lg:px-24 py-10`
+      }
+    >
       <div id="logo">
         <Logo />
       </div>
@@ -57,14 +62,31 @@ const Login: NextPageWithLayout = () => {
           </Link>
         </p>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} id="register" className="font-body w-full md:w-96 flex flex-col gap-y-3">
-        <Input config={register("email")} name="email" placeholder="Email" icon={<AtIcon />} type="email" autoComplete="off" />
-        <PasswordInput config={register("password")} placeholder="Password" autoComplete="off" />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        id="register"
+        className="font-body w-full md:w-96 flex flex-col gap-y-3"
+      >
+        <Input
+          config={register("email")}
+          name="email"
+          placeholder="Email"
+          icon={<AtIcon />}
+          type="email"
+          autoComplete="off"
+        />
+        <PasswordInput
+          config={register("password")}
+          placeholder="Password"
+          autoComplete="off"
+        />
         <button
           type="submit"
           disabled={isSubmitting}
           className={`my-4 w-full md:w-96 bg-sky-600 text-white text-lg font-bold py-2 font-display rounded-3xl hover:bg-sky-700 ${
-            isSubmitting ? "outline outline-offset-4 outline-2 outline-sky-700 shadow" : null
+            isSubmitting
+              ? "outline outline-offset-4 outline-2 outline-sky-700 shadow"
+              : null
           }`}
         >
           {isSubmitting == true ? "Loading..." : "Login"}

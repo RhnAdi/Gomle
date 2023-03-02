@@ -21,9 +21,12 @@ const Register: NextPageWithLayout = () => {
     formState: { isSubmitting },
   } = useForm();
   const onSubmit = (data: any) => {
+    if (data.confirm_password !== data.password) {
+      throw new Error("Confirm Password don't match.");
+    }
     return new Promise((resolve, reject) => {
       axios
-        .post("http://127.0.0.1:8080/users/register", {
+        .post("http://127.0.0.1:8080/api/v1/users/register", {
           firstname: data.firstname,
           lastname: data.lastname,
           username: data.username,
@@ -31,20 +34,24 @@ const Register: NextPageWithLayout = () => {
           password: data.password,
         })
         .then((res) => {
-          const token = res.data.data.token;
+          const token = res.data.token;
           hasCookie("auth") && deleteCookie("auth");
           setCookie("auth", token);
           router.push("/");
           resolve(res);
         })
         .catch((err) => {
-          console.log(err);
           reject(err);
         });
     });
   };
   return (
-    <div className={auth_style.wrapper + ` w-screen h-screen px-10 sm:px-16 md:px-20 lg:px-24 py-10`}>
+    <div
+      className={
+        auth_style.wrapper +
+        ` w-screen h-screen px-10 sm:px-16 md:px-20 lg:px-24 py-10`
+      }
+    >
       <div id="logo">
         <Logo />
       </div>
@@ -60,19 +67,59 @@ const Register: NextPageWithLayout = () => {
           </Link>
         </p>
       </div>
-      <form id="register" onSubmit={handleSubmit(onSubmit)} className="font-body w-full md:w-96 flex flex-col gap-y-3">
+      <form
+        id="register"
+        onSubmit={handleSubmit(onSubmit)}
+        className="font-body w-full md:w-96 flex flex-col gap-y-3"
+      >
         <div className="flex justify-between gap-x-3 w-full">
-          <Input config={register("firstname")} name="firstname" placeholder="Firstname" icon={<InfoIcon />} />
-          <Input config={register("lastname")} name="lastname" placeholder="Lastname" icon={<InfoIcon />} />
+          <Input
+            config={register("firstname")}
+            name="firstname"
+            placeholder="Firstname"
+            icon={<InfoIcon />}
+          />
+          <Input
+            config={register("lastname")}
+            name="lastname"
+            placeholder="Lastname"
+            icon={<InfoIcon />}
+          />
         </div>
-        <Input config={register("username")} name="username" placeholder="Username" icon={<UserIcon />} autoComplete="off" />
-        <Input config={register("email")} name="email" placeholder="Email" icon={<AtIcon />} type="email" autoComplete="off" />
-        <PasswordInput config={register("password")} name="password" placeholder="Password" autoComplete="off" />
+        <Input
+          config={register("username")}
+          name="username"
+          placeholder="Username"
+          icon={<UserIcon />}
+          autoComplete="off"
+        />
+        <Input
+          config={register("email")}
+          name="email"
+          placeholder="Email"
+          icon={<AtIcon />}
+          type="email"
+          autoComplete="off"
+        />
+        <PasswordInput
+          config={register("password")}
+          name="password"
+          placeholder="Password"
+          autoComplete="off"
+        />
+        <PasswordInput
+          config={register("confirm_password")}
+          name="confirm_password"
+          placeholder="Confirm Password"
+          autoComplete="off"
+        />
         <button
           type="submit"
           disabled={isSubmitting}
           className={`my-4 w-full md:w-96 bg-sky-600 text-white text-lg font-bold py-2 font-display rounded-3xl hover:bg-sky-700 ${
-            isSubmitting ? "outline outline-offset-4 outline-2 outline-sky-700 shadow" : null
+            isSubmitting
+              ? "outline outline-offset-4 outline-2 outline-sky-700 shadow"
+              : null
           }`}
         >
           {isSubmitting == true ? "Loading..." : "Register"}

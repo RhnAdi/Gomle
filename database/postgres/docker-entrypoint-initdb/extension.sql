@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS gomle;
+
+\c gomle;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
