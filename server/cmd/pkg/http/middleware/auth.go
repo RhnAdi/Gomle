@@ -3,7 +3,7 @@ package middleware
 import (
 	"net/http"
 
-	"github.com/RhnAdi/Gomle/internal/auth"
+	"github.com/RhnAdi/Gomle/server/internal/auth"
 	"github.com/gin-gonic/gin"
 )
 

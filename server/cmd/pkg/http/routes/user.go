@@ -1,8 +1,8 @@
 package routes
 
 import (
-	UserHandler "github.com/RhnAdi/Gomle/pkg/http/handler/user"
-	"github.com/RhnAdi/Gomle/pkg/http/middleware"
+	UserHandler "github.com/RhnAdi/Gomle/server/pkg/http/handler/user"
+	"github.com/RhnAdi/Gomle/server/pkg/http/middleware"
 	"github.com/gin-gonic/gin"
 )
 

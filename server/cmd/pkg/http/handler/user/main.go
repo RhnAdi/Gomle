@@ -1,6 +1,6 @@
 package UserHandler
 
-import "github.com/RhnAdi/Gomle/pkg/domain"
+import "github.com/RhnAdi/Gomle/server/pkg/domain"
 
 type UserHandler struct {
 	service domain.UserService

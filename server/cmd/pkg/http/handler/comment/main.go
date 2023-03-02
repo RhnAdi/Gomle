@@ -1,7 +1,7 @@
 package CommentHandler
 
 import (
-	"github.com/RhnAdi/Gomle/pkg/domain"
+	"github.com/RhnAdi/Gomle/server/pkg/domain"
 )
 
 type CommentHandler struct {

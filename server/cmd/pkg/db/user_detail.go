@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/RhnAdi/Gomle/pkg/models"
+	"github.com/RhnAdi/Gomle/server/pkg/models"
 	"gorm.io/gorm"
 )
 

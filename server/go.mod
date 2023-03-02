@@ -1,4 +1,4 @@
-module github.com/RhnAdi/Gomle
+module github.com/RhnAdi/Gomle/server
 
 go 1.17
 

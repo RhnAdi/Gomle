@@ -1,8 +1,8 @@
 package routes
 
 import (
-	PostHandler "github.com/RhnAdi/Gomle/pkg/http/handler/post"
-	"github.com/RhnAdi/Gomle/pkg/http/middleware"
+	PostHandler "github.com/RhnAdi/Gomle/server/pkg/http/handler/post"
+	"github.com/RhnAdi/Gomle/server/pkg/http/middleware"
 	"github.com/gin-gonic/gin"
 )
 

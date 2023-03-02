@@ -1,6 +1,6 @@
 package dto
 
-import "github.com/RhnAdi/Gomle/pkg/models"
+import "github.com/RhnAdi/Gomle/server/pkg/models"
 
 type CommentRequest struct {
 	Text  string `json:"text" binding:"required"`

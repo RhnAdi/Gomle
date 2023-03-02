@@ -3,8 +3,8 @@ package UserHandler
 import (
 	"net/http"
 
-	"github.com/RhnAdi/Gomle/pkg/dto"
-	"github.com/RhnAdi/Gomle/pkg/http/helper"
+	"github.com/RhnAdi/Gomle/server/pkg/dto"
+	"github.com/RhnAdi/Gomle/server/pkg/http/helper"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"

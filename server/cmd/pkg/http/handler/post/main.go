@@ -1,6 +1,6 @@
 package PostHandler
 
-import "github.com/RhnAdi/Gomle/pkg/domain"
+import "github.com/RhnAdi/Gomle/server/pkg/domain"
 
 type PostHandler struct {
 	service domain.PostService

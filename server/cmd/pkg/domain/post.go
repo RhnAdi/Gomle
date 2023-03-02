@@ -1,9 +1,9 @@
 package domain
 
 import (
-	"github.com/RhnAdi/Gomle/internal/auth"
-	"github.com/RhnAdi/Gomle/pkg/dto"
-	"github.com/RhnAdi/Gomle/pkg/models"
+	"github.com/RhnAdi/Gomle/server/internal/auth"
+	"github.com/RhnAdi/Gomle/server/pkg/dto"
+	"github.com/RhnAdi/Gomle/server/pkg/models"
 )
 
 type Post struct {

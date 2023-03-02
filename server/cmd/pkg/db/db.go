@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/RhnAdi/Gomle/pkg/models"
+	"github.com/RhnAdi/Gomle/server/pkg/models"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

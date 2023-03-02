@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/RhnAdi/Gomle/pkg/dto"
-	"github.com/RhnAdi/Gomle/pkg/http/helper"
+	"github.com/RhnAdi/Gomle/server/pkg/dto"
+	"github.com/RhnAdi/Gomle/server/pkg/http/helper"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"github.com/jackc/pgconn"

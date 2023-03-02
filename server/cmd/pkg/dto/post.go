@@ -3,7 +3,7 @@ package dto
 import (
 	"time"
 
-	"github.com/RhnAdi/Gomle/pkg/models"
+	"github.com/RhnAdi/Gomle/server/pkg/models"
 )
 
 type AllPostResponse struct {

@@ -4,7 +4,7 @@ import (
 	"mime/multipart"
 	"time"
 
-	"github.com/RhnAdi/Gomle/pkg/models"
+	"github.com/RhnAdi/Gomle/server/pkg/models"
 )
 
 type UserRegisterBody struct {

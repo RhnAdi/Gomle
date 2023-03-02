@@ -1,6 +1,6 @@
 package domain
 
-import "github.com/RhnAdi/Gomle/pkg/models"
+import "github.com/RhnAdi/Gomle/server/pkg/models"
 
 type Profile struct {
 	ID           string `json:"id"`
